@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .sidebar {
+        background-color: #f8f9fa;
+        height: 100vh;
+        padding: 20px;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        margin-bottom: 10px;
+      }
+
+      .sidebar ul li a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      .main-content {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <a class="navbar-brand" href="#">User Dashboard</a>
+      <!-- Add navigation links or dropdowns as needed -->
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-4 col-lg-2 bg-light sidebar">
+          <ul>
+            <li class="bg-danger btn text-light" style="font-weight: bold">
+              Download PhotoCard
+            </li>
+          </ul>
+        </div>
+        <div class="col-8 col-lg-10 main-content">
+          <!-- <div class="event-id-card">
+            <img
+              id="profileImage"
+              src="../assets/images/logo-dark.png"
+              alt="Profile Picture"
+            />
+            <h4 class="text-danger">John Doe</h4>
+            <p class="text-danger">Event Participant</p>
+            <p>
+              Event Name:
+              <span class="badge badge-danger">Example Event</span>
+            </p>
+            <p class="text-danger">
+              Date: <span class="badge badge-dark">July 15, 2023</span>
+            </p>
+            <p>
+              Location:
+              <span class="badge badge-danger">New York City</span>
+            </p>
+            <p>Ticket ID: <span class="badge badge-dark">ABCD1234</span></p>
+          </div> -->
+        </div>
+
+        <div class="card col-md-6 justify-content-center" id="container">
+          <img
+            src="../assets/images/contact1.png"
+            class="card-img-top"
+            alt="Image 2"
+          />
+          <div class="card-body">
+            <h5 class="card-title">
+              20th Mini Converge- Aso 2023 Accreditation Portal
+            </h5>
+            <!-- <p class="card-text text-danger">July 2023</p> -->
+            <a href="eventDetails.html" class="btn btn-danger bg-danger"
+              >Read More</a
+            >
+          </div>
+        </div>
+          <div class="row justify-content-center">
+            <div class="col-8 col-lg-10">
+              <div class="event-id-card">
+                <img
+                  id="profileImage"
+                  src="../assets/images/logo-dark.png"
+                  alt="Profile Picture"
+                />
+                <h4 class="text-danger">John Doe</h4>
+                <p class="text-danger">Event Participant</p>
+                <p>
+                  Event Name:
+                  <span class="badge badge-danger">Example Event</span>
+                </p>
+                <p class="text-danger">
+                  Date: <span class="badge badge-dark">July 15, 2023</span>
+                </p>
+                <p>
+                  Location:
+                  <span class="badge badge-danger">New York City</span>
+                </p>
+                <p>Ticket ID: <span class="badge badge-dark">ABCD1234</span></p>
+              </div>
+
+              <button id="convertBtn">Convert to PDF</button>
+            </div>
+          </div>
+        </div> -->
+        <button id="convertBtn">Convert to PDF</button>
+
+        <script>
+          const convertBtn = document.getElementById("convertBtn");
+
+          convertBtn.addEventListener("click", () => {
+            const element = document.getElementById("container");
+
+            const options = {
+              margin: 1,
+              filename: "event_id_card.pdf",
+              image: { type: "jpeg", quality: 1 },
+              html2canvas: { scale: 2 },
+              jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            };
+
+            html2pdf().set(options).from(element).save();
+          });
+        </script>
+      </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
