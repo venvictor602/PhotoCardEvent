@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML to PDF Conversion</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Hello, Victor!</h1>
+      <p>This is an example of how the downloaed pdf will Look.</p>
+    </div>
+
+    <button id="convertBtn">Convert to PDF</button>
+
+    <script>
+      const convertBtn = document.getElementById("convertBtn");
+
+      convertBtn.addEventListener("click", () => {
+        const element = document.getElementById("content");
+
+        // Set the options for the conversion
+        const options = {
+          filename: "photocard.pdf",
+          margin: 10,
+          jsPDF: { format: "a4", orientation: "portrait" },
+        };
+
+        html2pdf().from(element).save();
+      });
+    </script>
+  </body>
+</html>

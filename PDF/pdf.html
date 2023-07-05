@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML to PDF Conversion</title>
+    <!-- Include the html2pdf library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <!-- Your HTML content -->
+    <h1>Hello, Victor!</h1>
+    <p>This is an of how the downloaded photo card will Look.</p>
+
+    <!-- Add a button to trigger the conversion -->
+    <button id="convertBtn">Convert to PDF</button>
+
+    <!-- Add a script to handle the conversion -->
+    <script>
+      const convertBtn = document.getElementById("convertBtn");
+
+      convertBtn.addEventListener("click", () => {
+        // Select the HTML element or page to convert
+        const element = document.body;
+
+        // Set the options for the conversion
+        const options = {
+          filename: "converted.pdf",
+          margin: 10,
+          jsPDF: { format: "a4", orientation: "portrait" },
+        };
+
+        // Call the html2pdf library to convert the HTML to PDF
+        html2pdf().set(options).from(element).save();
+      });
+    </script>
+  </body>
+</html>

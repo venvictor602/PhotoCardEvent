@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event ID Card</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+      .event-id-card {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        /* text-align: center; */
+      }
+
+      .event-id-card img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+      }
+
+      .event-id-card h4 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .event-id-card p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 10px;
+      }
+
+      .event-id-card .badge {
+        font-size: 14px;
+        padding: 6px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6">
+          <div class="event-id-card">
+            <img
+              id="profileImage"
+              src="../assets/images/logo-dark.png"
+              alt="Profile Picture"
+            />
+            <h4 class="text-danger">John Doe</h4>
+            <p class="text-danger">Event Participant</p>
+            <p>
+              Event Name: <span class="badge badge-danger">Example Event</span>
+            </p>
+            <p class="text-danger">
+              Date: <span class="badge badge-dark">July 15, 2023</span>
+            </p>
+            <p>
+              Location: <span class="badge badge-danger">New York City</span>
+            </p>
+            <p>Ticket ID: <span class="badge badge-dark">ABCD1234</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="convertBtn">Convert to PDF</button>
+
+    <script>
+      const convertBtn = document.getElementById("convertBtn");
+
+      convertBtn.addEventListener("click", () => {
+        const element = document.getElementById("container");
+
+        const options = {
+          margin: 1,
+          filename: "event_id_card.pdf",
+          image: { type: "jpeg", quality: 1 },
+          html2canvas: { scale: 2 },
+          jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+        };
+
+        html2pdf().set(options).from(element).save();
+      });
+    </script>
+  </body>
+</html>
