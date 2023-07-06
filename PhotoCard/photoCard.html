@@ -2,266 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>HTML to PDF Conversion</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <style>
-      /* Google Fonts - Poppins */
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-      }
-      body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #efefef;
-      }
-      .slide-container {
-        max-width: 1120px;
-        width: 100%;
-        padding: 40px 0;
-      }
-      .slide-content {
-        margin: 0 40px;
-        overflow: hidden;
-        border-radius: 25px;
-      }
-      .card {
-        border-radius: 25px;
-        background-color: #fff;
-      }
-      .image-content,
-      .card-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 10px 14px;
-      }
-      .image-content {
-        position: relative;
-        row-gap: 5px;
-        padding: 25px 0;
-      }
-      .overlay,
-      .overlay2 {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        background-color: blue;
-        border-radius: 25px 25px 0 25px;
-      }
-      .overlay::before,
-      .overlay::after,
-      .overlay2::before,
-      .overlay2::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        bottom: -40px;
-        height: 40px;
-        width: 40px;
-        background-color: red;
-      }
-      .overlay::after {
-        border-radius: 0 25px 0 0;
-        background-color: #fff;
-      }
-      .card-image {
-        position: relative;
-        height: 150px;
-        width: 150px;
-        border-radius: 50%;
-        background: #fff;
-        padding: 3px;
-      }
-      .card-image .card-img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 4px solid red;
-      }
-      .name {
-        font-size: 18px;
-        font-weight: 500;
-        color: #333;
-      }
-      .description {
-        font-size: 14px;
-        color: #707070;
-        text-align: center;
-      }
-      .button {
-        border: none;
-        font-size: 16px;
-        color: #fff;
-        padding: 8px 16px;
-        background-color: red;
-        border-radius: 6px;
-        margin: 14px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      .button:hover {
-        background: red;
-      }
-
-      .swiper-navBtn {
-        color: red;
-        transition: color 0.3s ease;
-      }
-      .swiper-navBtn:hover {
-        color: red;
-      }
-      .swiper-navBtn::before,
-      .swiper-navBtn::after {
-        font-size: 35px;
-      }
-      .swiper-button-next {
-        right: 0;
-      }
-      .swiper-button-prev {
-        left: 0;
-      }
-      .swiper-pagination-bullet {
-        background-color: #6e93f7;
-        opacity: 1;
-      }
-      .swiper-pagination-bullet-active {
-        background-color: red;
-      }
-
-      @media screen and (max-width: 768px) {
-        .slide-content {
-          margin: 0 10px;
-        }
-        .swiper-navBtn {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="card-wrapper swiper-wrapper" id="content">
-      <div class="card swiper-slide">
-        <div class="image-content">
-          <span class="overlay"></span>
-          <div class="card-image">
-            <img src="../assets//images//Me-min.jpg" alt="" class="card-img" />
-          </div>
-        </div>
-        <div class="card-content">
-          <form action="#">
-            <div class="form-group">
-              <label for="Full Name">Full Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder=""
-                disabled
-              />
-            </div>
-            <div class="form-group">
-              <label for="Full Name">Full Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder=""
-                disabled
-              />
-            </div>
-            <div class="form-group">
-              <label for="Full Name">Full Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder=""
-                disabled
-              />
-            </div>
-            <div class="form-group">
-              <label for="Full Name">Full Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder=""
-                disabled
-              />
-            </div>
-            <div class="form-group">
-              <label for="Full Name">Full Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder=""
-                disabled
-              />
-            </div>
-            <div class="form-group">
-              <label for="Full Name">Full Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder=""
-                disabled
-              />
-            </div>
-            <div class="bg-danger">Hello</div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <button id="convertBtn" class="btn btn-danger" style="margin-top: 20px">
-      Convert to PDF
-    </button>
-
-    <!-- <button id="convertBtn">Convert to PDF</button> -->
-
-    <script>
-      const convertBtn = document.getElementById("convertBtn");
-
-      convertBtn.addEventListener("click", () => {
-        const content = document.getElementById("content");
-
-        // Create a new jsPDF instance
-        const doc = new jsPDF();
-
-        // Convert HTML to PDF
-        doc.html(content, {
-          callback: function (pdf) {
-            // Save the PDF file
-            pdf.save("converted_document.pdf");
-          },
-        });
-      });
-    </script>
-  </body>
-</html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Event ID Card</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
@@ -407,7 +149,10 @@
     </style>
   </head>
   <body>
-    <div class="slide-container swiper">
+    <div id="content">
+      <h1>Hello, World!</h1>
+      <p>This is an example HTML page.</p>
+
       <div class="slide-content col-lg-4 col-md-6 justify-content-center">
         <div class="card-wrapper swiper-wrapper" id="container">
           <div class="card swiper-slide">
@@ -488,18 +233,16 @@
             </div>
           </div>
         </div>
-        <button id="convertBtn" class="btn btn-danger" style="margin-top: 20px">
-          Convert to PDF
-        </button>
       </div>
     </div>
+
+    <button id="convertBtn">Convert to PDF</button>
 
     <script>
       const convertBtn = document.getElementById("convertBtn");
 
       convertBtn.addEventListener("click", () => {
-        const element = document.getElementById("container");
-
+        const element = document.getElementById("content");
         const options = {
           margin: 1,
           filename: "event_id_card.pdf",
@@ -509,7 +252,8 @@
         };
 
         html2pdf().set(options).from(element).save();
+        // html2pdf().from(element).save("converted_document.pdf");
       });
     </script>
   </body>
-</html> -->
+</html>
